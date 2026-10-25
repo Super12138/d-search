@@ -15,33 +15,41 @@ import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-const isValidate = ref(false);
-const searchQueryRef = useTemplateRef<TextField>("search-query");
-const searchQuery = ref("");
-const specificSite = ref("");
-const searchQueryError = computed(() => isValidate.value && searchQuery.value.length === 0);
-
-const apiToken = useStorage("token", "");
+const apiKey = useStorage("token", "");
 const pageCount = useStorage("page_count", 10);
 
+const emptyTip = "Value cannot be empty.";
+
+const isValidate = ref(false);
+const searchQueryRef = useTemplateRef<TextField>("search-query");
+const apiKeyRef = useTemplateRef<TextField>("api-key");
+const searchQuery = ref("");
+const specificSite = ref("");
+const searchLanguage = ref("");
+const searchQueryError = computed(() => isValidate.value && searchQuery.value.length === 0);
+const apiKeyError = computed(() => isValidate.value && apiKey.value.length === 0);
+
 const navigateToDetail = () => {
-    if (!isValidate.value) {
-        isValidate.value = true;
-    }
-    router.push(searchQuery.value ? `/search/${encodeURIComponent(searchQuery.value)}` : "");
+    if (!isValidate.value) isValidate.value = true;
+    if (searchQueryError.value || apiKeyError.value) return;
+
+    const sitesStr = specificSite.value
+        .split(",")
+        .map((val) => `site:${val}`)
+        .join(" OR ");
+
+    const langStr = searchLanguage.value.split(",").join(",");
+
+    const finalKeyword = `${searchQuery.value} ${sitesStr} lang:${langStr}`;
+    router.push(`/search/${encodeURIComponent(finalKeyword)}`);
 };
 
 watch(searchQueryError, (isError) => {
-    if (searchQueryRef.value === null) return;
-    searchQueryRef.value.setCustomValidity(isError ? "Value cannot be empty." : "");
+    searchQueryRef.value?.setCustomValidity(isError ? emptyTip : "");
 });
 
-watch(specificSite, (sitesStr) => {
-    if (sitesStr.length === 0) return;
-
-    const sites = sitesStr.split(",");
-
-    searchQuery.value = searchQuery.value + sites.map((val) => `site:${val}`).join(" OR ");
+watch(apiKeyError, (isError) => {
+    apiKeyRef.value?.setCustomValidity(isError ? emptyTip : "");
 });
 
 onMounted(() => {
@@ -53,8 +61,9 @@ onMounted(() => {
     <div class="container">
         <form class="search-panel" @submit.prevent="navigateToDetail">
             <mdui-text-field
+                ref="api-key"
                 label="Key"
-                v-model.trim="apiToken"
+                v-model.trim="apiKey"
                 type="password"
                 maxlength="35"
             ></mdui-text-field>
@@ -80,6 +89,15 @@ onMounted(() => {
                                 label="站点"
                                 slot="end-icon"
                                 v-model.trim.lazy="specificSite"
+                            ></mdui-text-field>
+                        </mdui-list-item>
+
+                        <mdui-list-item headline="指定语言" description="多个语言请用英文逗号隔开">
+                            <mdui-text-field
+                                label="语言"
+                                placeholder="e.g. zh,en"
+                                slot="end-icon"
+                                v-model.trim.lazy="searchLanguage"
                             ></mdui-text-field>
                         </mdui-list-item>
                     </div>

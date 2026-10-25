@@ -45,11 +45,11 @@ mdui-card {
     padding: 1rem;
     margin: 1rem;
     display: block;
-    box-sizing: border-box
+    box-sizing: border-box;
 }
 
 mdui-avatar {
-    background-color: rgb(var(--mdui-color-secondary-container))
+    background-color: rgb(var(--mdui-color-secondary-container));
 }
 
 .header {
@@ -92,7 +92,7 @@ mdui-avatar {
     margin-bottom: 0.5rem;
 }
 
-.content >.content{
+.content > .content {
     margin: 0;
 }
 

@@ -10,11 +10,6 @@ export default defineConfig({
     sortImports: {
         partitionByComment: true,
     },
-    ignorePatterns: [
-        ".tauri/",
-        "pnpm-lock.yaml",
-        ".vscode/",
-        "index.html"
-    ],
+    ignorePatterns: [".tauri/", "pnpm-lock.yaml", ".vscode/", "index.html"],
     trailingComma: "es5",
 });
