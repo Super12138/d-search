@@ -1,0 +1,104 @@
+body {
+    height: 100%;
+    margin: 0;
+    opacity: 0;
+    font-family:
+        -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+        "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body.ready {
+    opacity: 1;
+    transition: 0.25s opacity;
+}
+
+h1 {
+    line-height: var(--mdui-typescale-headline-medium-line-height);
+    font-size: var(--mdui-typescale-headline-medium-size);
+    letter-spacing: var(--mdui-typescale-headline-medium-tracking);
+    font-weight: var(--mdui-typescale-headline-medium-weight);
+}
+
+h2 {
+    line-height: var(--mdui-typescale-headline-small-line-height);
+    font-size: var(--mdui-typescale-headline-small-size);
+    letter-spacing: var(--mdui-typescale-headline-small-tracking);
+    font-weight: var(--mdui-typescale-headline-small-weight);
+}
+
+h3 {
+    line-height: var(--mdui-typescale-title-large-line-height);
+    font-size: var(--mdui-typescale-title-large-size);
+    letter-spacing: var(--mdui-typescale-title-large-tracking);
+    font-weight: var(--mdui-typescale-title-large-weight);
+}
+
+h4 {
+    line-height: var(--mdui-typescale-title-medium-line-height);
+    font-size: var(--mdui-typescale-title-medium-size);
+    letter-spacing: var(--mdui-typescale-title-medium-tracking);
+    font-weight: var(--mdui-typescale-title-medium-weight);
+}
+
+p,
+span {
+    line-height: var(--mdui-typescale-label-large-line-height);
+    font-size: var(--mdui-typescale-label-large-size);
+    letter-spacing: var(--mdui-typescale-label-large-tracking);
+    font-weight: var(--mdui-typescale-label-large-weight);
+}
+
+strong {
+    /* 确保加粗文本不会换行 */
+    display: contents;
+    line-height: var(--mdui-typescale-label-large-line-height);
+    font-size: var(--mdui-typescale-label-large-size);
+    letter-spacing: var(--mdui-typescale-label-large-tracking);
+}
+
+img {
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    user-select: none;
+}
+
+code {
+    padding: 2px 6px;
+    color: rgb(var(--mdui-color-on-surface));
+    background-color: rgb(var(--mdui-color-surface-container-highest));
+    border-radius: 2px;
+    font-family:
+        ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+        monospace;
+}
+
+/* 链接颜色 */
+a:link {
+    color: rgb(var(--mdui-color-primary));
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgb(var(--mdui-color-tertiary));
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgb(var(--mdui-color-on-primary-container));
+    text-decoration: none;
+}
+
+a:active {
+    color: rgb(var(--mdui-color-tertiary));
+    text-decoration: none;
+}
+
+/* 选中文本高亮颜色 */
+::selection {
+    background: rgba(var(--mdui-color-secondary-container), 0.8) !important;
+}
